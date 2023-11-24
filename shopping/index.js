@@ -7,10 +7,10 @@ const errorHandler = require('./middleware/errorHandler')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const corsOptions = require('./config/corsOptions')
-const PORT = process.env.PORT || 3501
+const PORT = process.env.PORT || 3502
 const colors = require("colors");
 const { databaseConnection } = require('./database');
-const customerRoute = require("./routes/v1/customerRoute");
+const shoppingRoute = require("./routes/v1/shoppingRoute");
 
 console.log("You are on:", colors.blue(process.env.NODE_ENV));
 
@@ -24,7 +24,7 @@ app.use(express.json());
 
 app.use(cookieParser());
 
-app.use("/api/v1/customer", customerRoute);
+app.use("/api/v1/shopping", shoppingRoute);
 
 app.use("/", express.static(path.join(__dirname, "public")));
 
