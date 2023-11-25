@@ -4,3 +4,5 @@
 20231125	17:16:07	8bf48042-26c9-42c1-a183-03a1c7850b00	GET	/favicon.ico	undefined
 20231125	17:26:46	43845661-e618-43ad-b408-096f640a7c02	GET	/	undefined
 20231125	17:27:35	089731d5-6a32-48c5-be75-2bc3ca0faf9d	PUT	/wishlist	undefined
+20231125	19:19:43	b1f096d1-4679-4933-997b-f86a9aecc8ce	POST	/product/create	undefined
+20231125	19:19:52	728438f4-a142-4e3c-8eeb-2bff908ac6a1	GET	/	undefined

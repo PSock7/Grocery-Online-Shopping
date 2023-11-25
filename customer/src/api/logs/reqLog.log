@@ -16,3 +16,5 @@
 20231125	17:22:38	aa9b639f-5116-4cda-be20-09935cdd00e6	POST	/customer/customer/login	undefined
 20231125	17:22:38	1f6fec9e-862f-464a-aa17-663b69f2d779	POST	/customer/customer/login	undefined
 20231125	17:26:13	0fdc9f05-0f04-47db-903d-9834ddb65cb1	POST	/login	undefined
+20231125	19:12:39	bf7bc2d7-30ff-4419-bbdd-96004c9abfea	POST	/login	http://localhost:3000
+20231125	19:16:13	4867e48b-48a4-4ee0-ba9b-373cebcc7719	POST	/login	http://localhost:3000
