@@ -18,3 +18,14 @@
 20231125	17:26:13	0fdc9f05-0f04-47db-903d-9834ddb65cb1	POST	/login	undefined
 20231125	19:12:39	bf7bc2d7-30ff-4419-bbdd-96004c9abfea	POST	/login	http://localhost:3000
 20231125	19:16:13	4867e48b-48a4-4ee0-ba9b-373cebcc7719	POST	/login	http://localhost:3000
+20231125	19:29:04	575c71c0-10e6-4502-b079-79c94d25d392	POST	/login	http://localhost:3000
+20231125	19:29:05	f74f0517-65de-4a85-9835-2b9babac3259	GET	/profile	http://localhost:3000
+20231125	19:29:05	6e4b80f1-b4bb-4185-aea2-5f7ae48b002c	GET	/profile	http://localhost:3000
+20231125	20:22:43	0ef31d80-6821-463d-8e8d-81e988b1ef60	POST	/login	http://localhost:3000
+20231125	20:22:44	929068bb-b171-49bf-a762-d6c5b9d3ef57	GET	/profile	http://localhost:3000
+20231125	20:22:44	f058f8ca-9858-4e58-ad6f-54d791297430	GET	/profile	http://localhost:3000
+20231125	20:22:55	fb19ff07-2173-44ba-b253-1a4afdb28402	GET	/profile	http://localhost:3000
+20231125	20:22:55	57911715-035f-4856-a708-e1785d77fb58	GET	/profile	http://localhost:3000
+20231125	20:25:45	98b2dfcd-9fa6-44d4-bbb3-092b85f658f7	POST	/login	http://localhost:3000
+20231125	20:25:45	ddf9944e-740d-4810-be6d-17dc7869bd5d	GET	/profile	http://localhost:3000
+20231125	20:25:45	d86f6841-afca-4cb6-b3a7-154dbeb450df	GET	/profile	http://localhost:3000

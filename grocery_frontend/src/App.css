@@ -3,7 +3,10 @@
 }
 body {
   background-color: #e8e8e8;
-  overflow: hidden;
+  width: 100%;
+}
+.card-img {
+  width: 100%;
 }
 
 .App-logo {

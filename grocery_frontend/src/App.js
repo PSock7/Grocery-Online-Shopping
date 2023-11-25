@@ -7,16 +7,16 @@ import { ProductDetails } from "./pages/ProductDetail";
 
 function App() {
   return (
-    <>
-      <Router>
+    <Router>
+      <div>
         <Header />
         <Routes>
           <Route path="/details/:id" element={<ProductDetails />} />
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
         </Routes>
-      </Router>
-    </>
+      </div>
+    </Router>
   );
 }
 
