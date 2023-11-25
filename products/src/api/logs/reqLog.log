@@ -71,3 +71,5 @@
 20231125	20:22:59	6ffebdbe-fed5-4c98-997b-3626b918b9a1	DELETE	/wishlist/656209e67552e7443cb2b9cd	http://localhost:3000
 20231125	20:25:53	dcb49118-ba9d-4ad3-842c-16f4c91a77a2	DELETE	/wishlist/656209e67552e7443cb2b9cd	http://localhost:3000
 20231125	20:26:59	4facfb38-fa42-429f-a913-f0aac71892c3	GET	/	http://localhost:3000
+20231125	20:27:44	7f0ab9eb-7a43-4b90-ace9-8963e393ad02	GET	/	http://localhost:3000
+20231125	20:27:45	943b3824-5c26-443c-b61b-40c6238abd9b	GET	/	http://localhost:3000
