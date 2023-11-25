@@ -16,6 +16,7 @@ module.exports = async (app) => {
   app.use("/", require("./routes/root"));
   app.use(cookieParser());
   app.use(errorHandler);
+  app.use(logger);
 
   app.all("*", (req, res) => {
     res.status(404);
