@@ -1,23 +1,24 @@
-const express = require('express')
+const express = require("express");
 const mongoose = require("mongoose");
-const app = express()
-const path = require('path')
+const app = express();
+const path = require("path");
 const { logger, logEvents } = require("./middleware/logger");
-const errorHandler = require('./middleware/errorHandler')
-const cookieParser = require('cookie-parser')
-const cors = require('cors')
-const corsOptions = require('./config/corsOptions')
-const PORT = process.env.PORT || 3500
+const errorHandler = require("./middleware/errorHandler");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
+const corsOptions = require("./config/corsOptions");
+const PORT = process.env.PORT || 3500;
 const colors = require("colors");
-const { databaseConnection } = require('./database');
+const { databaseConnection } = require("./database");
 const productRoute = require("./routes/v1/productRoute");
+const eventRoutes = require("./routes/v1/event");
 
 console.log("You are on:", colors.blue(process.env.NODE_ENV));
 
 databaseConnection();
 
 app.use(logger);
-
+app.use(eventRoutes);
 app.use(cors(corsOptions));
 
 app.use(express.json());
@@ -44,16 +45,16 @@ app.all("*", (req, res) => {
 app.use(errorHandler);
 
 mongoose.connection.once("open", () => {
-    console.log("Connected to MongoDB");
-    app.listen(PORT, "localhost", () =>
-      console.log(colors.cyan(`Server running on http://localhost:${PORT}`))
-    );
-  });
-  
-  mongoose.connection.on("error", (err) => {
-    console.log(err);
-    logEvents(
-      `${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`,
-      "mongoErrLog.log"
-    );
-  });
+  console.log("Connected to MongoDB");
+  app.listen(PORT, "localhost", () =>
+    console.log(colors.cyan(`Server running on http://localhost:${PORT}`))
+  );
+});
+
+mongoose.connection.on("error", (err) => {
+  console.log(err);
+  logEvents(
+    `${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`,
+    "mongoErrLog.log"
+  );
+});

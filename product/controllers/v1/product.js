@@ -1,114 +1,134 @@
 const ProductService = require("../../service/product-service");
-const CustomerService = require("../../../customer/service/customer-service");
-const UserAuth = require("../../middleware/auth");
 const asyncHandler = require("express-async-handler");
-
+const {
+  PublishCustomerEvent,
+  PublishShoppingEvent,
+  PublishMessage,
+} = require("../../utils");
+const CUSTOMER_SERVICE = process.env.CUSTOMER_SERVICE;
+const SHOPPING_SERVICE = process.env.SHOPPING_SERVICE;
 class ProductController {
-  constructor() {
-    this.productService = new ProductService();
-    this.customerService = new CustomerService();
+  constructor(channel) {
+    this.service = new ProductService();
+    this.channel = channel;
   }
 
   createProduct = asyncHandler(async (req, res, next) => {
-    try {
-      const { name, desc, type, unit, price, available, suplier, banner } = req.body;
-      const { data } = await this.productService.CreateProduct({
-        name,
-        desc,
-        type,
-        unit,
-        price,
-        available,
-        suplier,
-        banner,
-      });
-      return res.json(data);
-    } catch (err) {
-      next(err);
-    }
+    const { name, desc, type, unit, price, available, suplier, banner } =
+      req.body;
+    const { data } = await this.service.CreateProduct({
+      name,
+      desc,
+      type,
+      unit,
+      price,
+      available,
+      suplier,
+      banner,
+    });
+    res.json(data);
   });
 
   getProductsByCategory = asyncHandler(async (req, res, next) => {
     const type = req.params.type;
+
     try {
-      const { data } = await this.productService.GetProductsByCategory(type);
-      return res.status(200).json(data);
-    } catch (err) {
-      next(err);
+      const { data } = await this.service.GetProductsByCategory(type);
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(404).json({ error });
     }
   });
 
   getProductDescription = asyncHandler(async (req, res, next) => {
     const productId = req.params.id;
+
     try {
-      const { data } = await this.productService.GetProductDescription(productId);
-      return res.status(200).json(data);
-    } catch (err) {
-      next(err);
+      const { data } = await this.service.GetProductDescription(productId);
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(404).json({ error });
     }
   });
 
   getSelectedProducts = asyncHandler(async (req, res, next) => {
-    try {
-      const { ids } = req.body;
-      const products = await this.productService.GetSelectedProducts(ids);
-      return res.status(200).json(products);
-    } catch (err) {
-      next(err);
-    }
+    const { ids } = req.body;
+    const products = await this.service.GetSelectedProducts(ids);
+    res.status(200).json(products);
   });
 
   addToWishlist = asyncHandler(async (req, res, next) => {
     const { _id } = req.user;
-    try {
-      const product = await this.productService.GetProductById(req.body._id);
-      const wishList = await this.customerService.AddToWishlist(_id, product);
-      return res.status(200).json(wishList);
-    } catch (err) {
-      next(err);
-    }
+    const { data } = await this.service.GetProductPayload(
+      _id,
+      { productId: req.body._id },
+      "ADD_TO_WISHLIST"
+    );
+
+    this.channel.publish(CUSTOMER_SERVICE, JSON.stringify(data));
+
+    res.status(200).json(data.data.product);
   });
 
   removeFromWishlist = asyncHandler(async (req, res, next) => {
     const { _id } = req.user;
     const productId = req.params.id;
-    try {
-      const product = await this.productService.GetProductById(productId);
-      const wishlist = await this.customerService.AddToWishlist(_id, product);
-      return res.status(200).json(wishlist);
-    } catch (err) {
-      next(err);
-    }
+
+    const { data } = await this.service.GetProductPayload(
+      _id,
+      { productId },
+      "REMOVE_FROM_WISHLIST"
+    );
+
+    this.channel.publish(CUSTOMER_SERVICE, JSON.stringify(data));
+
+    res.status(200).json(data.data.product);
   });
 
   manageCart = asyncHandler(async (req, res, next) => {
-    const { _id, qty } = req.body;
-    try {
-      const product = await this.productService.GetProductById(_id);
-      const result = await this.customerService.ManageCart(req.user._id, product, qty, false);
-      return res.status(200).json(result);
-    } catch (err) {
-      next(err);
-    }
+    const { _id } = req.user;
+    const { data } = await this.service.GetProductPayload(
+      _id,
+      { productId: req.body._id, qty: req.body.qty },
+      "ADD_TO_CART"
+    );
+
+    this.channel.publish(CUSTOMER_SERVICE, JSON.stringify(data));
+    this.channel.publish(SHOPPING_SERVICE, JSON.stringify(data));
+
+    const response = { product: data.data.product, unit: data.data.qty };
+
+    res.status(200).json(response);
   });
 
   removeFromCart = asyncHandler(async (req, res, next) => {
     const { _id } = req.user;
-    try {
-      const product = await this.productService.GetProductById(req.params.id);
-      const result = await this.customerService.ManageCart(_id, product, 0, true);
-      return res.status(200).json(result);
-    } catch (err) {
-      next(err);
-    }
+    const productId = req.params.id;
+
+    const { data } = await this.service.GetProductPayload(
+      _id,
+      { productId },
+      "REMOVE_FROM_CART"
+    );
+
+    this.channel.publish(CUSTOMER_SERVICE, JSON.stringify(data));
+    this.channel.publish(SHOPPING_SERVICE, JSON.stringify(data));
+
+    const response = { product: data.data.product, unit: data.data.qty };
+
+    res.status(200).json(response);
   });
 
-  getTopProductsAndCategory = asyncHandler(async (req, res, next) => {
+  whoAmI = (req, res, next) => {
+    res.status(200).json({ msg: "/ or /products : I am products Service" });
+  };
+
+  getTopProducts = asyncHandler(async (req, res, next) => {
     try {
-      const { data } = await this.productService.GetProducts();
-      return res.status(200).json(data);
-    } catch (err) {
-      next(err);
+      const { data } = await this.service.GetProducts();
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(404).json({ error });
     }
   });
 }
