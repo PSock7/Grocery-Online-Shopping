@@ -2,4 +2,4 @@
 ./customer/src/api/logs/reqLog.log
 db/
 .idea/
-K8s/frontend-ingress.yaml
+
