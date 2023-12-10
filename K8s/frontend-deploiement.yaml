@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grocery-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grocery-frontend
+  template:
+    metadata:
+      labels:
+        app: grocery-frontend
+    spec:
+      containers:
+        - name: grocery-frontend
+          image: xdev78/groceryfrontend:v1
+          ports:
+            - containerPort: 3000
