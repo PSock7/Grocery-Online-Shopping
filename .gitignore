@@ -1,5 +1,4 @@
-./products/src/api/logs/
-./customer/src/api/logs/reqLog.log
+products/src/api/logs/
 db/
 .idea/
-
+customer/src/api/logs/reqLog.log
