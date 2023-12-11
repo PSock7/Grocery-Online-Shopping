@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-node-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: product-node-deployment
+  template:
+    metadata:
+      labels:
+        app: product-node-deployment
+    spec:
+      containers:
+        - name: product-node-image
+          image: xdev78/product-node:v1
+          ports:
+            - containerPort: 3500
