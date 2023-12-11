@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gateway-node
+  template:
+    metadata:
+      labels:
+        app: gateway-node
+    spec:
+      containers:
+        - name: gateway-node-image
+          image: xdev78/gateway:v1
+          ports:
+            - containerPort: 8000
