@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-node-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: customer-node-deployment
+  template:
+    metadata:
+      labels:
+        app: customer-node-deployment
+    spec:
+      containers:
+        - name: customer-node-image
+          image: xdev78/customer-node:v1
+          ports:
+            - containerPort: 3501
