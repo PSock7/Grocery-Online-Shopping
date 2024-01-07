@@ -29,3 +29,8 @@
 20231125	20:25:45	98b2dfcd-9fa6-44d4-bbb3-092b85f658f7	POST	/login	http://localhost:3000
 20231125	20:25:45	ddf9944e-740d-4810-be6d-17dc7869bd5d	GET	/profile	http://localhost:3000
 20231125	20:25:45	d86f6841-afca-4cb6-b3a7-154dbeb450df	GET	/profile	http://localhost:3000
+20231213	14:14:05	58f61d82-5ccf-4f92-8cf6-b335032211a1	POST	/login	http://localhost:3000
+20231213	14:14:06	68d73dea-7063-48de-af99-55910fbff2c4	GET	/profile	http://localhost:3000
+20231213	14:14:06	b953f135-1d39-4000-9b20-1e67af6eacaa	GET	/profile	http://localhost:3000
+20231213	14:14:18	239eb2e4-4fda-4db7-94ab-a2115c0f045d	GET	/profile	http://localhost:3000
+20231213	14:14:18	b00d8417-6046-406b-8331-77b3f2875483	GET	/profile	http://localhost:3000

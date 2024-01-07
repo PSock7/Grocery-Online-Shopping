@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: product-node-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: product-node-deployment
@@ -13,7 +13,33 @@ spec:
         app: product-node-deployment
     spec:
       containers:
-        - name: product-node-image
-          image: xdev78/product-node:v1
-          ports:
-            - containerPort: 3500
+      - name: product
+        image: xdev78/product-node:v1
+        ports:
+        - containerPort: 3500
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-node-service
+spec:
+  selector:
+    app: product-node-deployment
+  ports:
+    - protocol: TCP
+      port: 3500
+      targetPort: 3500
+  type: LoadBalancer
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-node-service
+spec:
+  selector:
+    app: product-node-deployment
+  ports:
+    - protocol: TCP
+      port: 3500
+      targetPort: 3500
+  type: LoadBalancer

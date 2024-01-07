@@ -13,7 +13,20 @@ spec:
         app: grocery-frontend
     spec:
       containers:
-        - name: grocery-frontend
+        - name: grocery
           image: xdev78/groceryfrontend:v1
           ports:
-            - containerPort: 3000
+            - containerPort: 3000*
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grocery-frontend-service
+spec:
+  selector:
+    app: grocery-frontend
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: LoadBalancer

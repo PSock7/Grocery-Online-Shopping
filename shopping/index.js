@@ -10,6 +10,6 @@ app.use('/', (req,res,next) => {
 })
 
 
-app.listen(8003, () => {
-    console.log('Shopping is Listening to Port 8003')
+app.listen(3502, () => {
+    console.log('Shopping is Listening to Port 3502')
 })
