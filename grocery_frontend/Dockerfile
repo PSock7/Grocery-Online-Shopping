@@ -1,5 +1,5 @@
 FROM node
-WORKDIR /app/frontent
+WORKDIR /app/frontend
 COPY package.json .
 
 RUN npm install

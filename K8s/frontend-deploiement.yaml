@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: grocery
-          image: xdev78/groceryfrontend:v1
+          image: xdev78/frontend:v1
           ports:
             - containerPort: 3000
           env:

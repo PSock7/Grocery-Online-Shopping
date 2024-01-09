@@ -129,7 +129,7 @@ spec:
     spec:
       containers:
         - name: gateway
-          image: xdev78/gateway:v1
+          image: xdev78/gateway:v2
           ports:
             - containerPort: 8000
           env:
