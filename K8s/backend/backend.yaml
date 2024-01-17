@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: customer-node-deployment
+  namespace: grocery
 spec:
   replicas: 1
   selector:
@@ -26,6 +27,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: customer-node-service
+  namespace: grocery
 spec:
   type: NodePort
   selector:
@@ -41,6 +43,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: shopping-node-deployment
+  namespace: grocery
 spec:
   replicas: 1
   selector:
@@ -64,6 +67,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: shopping-service
+  namespace: grocery
 spec:
   type: NodePort
   selector:
@@ -79,6 +83,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: product-node-deployment
+  namespace: grocery
 spec:
   replicas: 1
   selector:
@@ -103,6 +108,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: product-node-service
+  namespace: grocery
 spec:
   type: NodePort
   selector:
@@ -117,6 +123,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gateway-node
+  namespace: grocery
 spec:
   replicas: 1
   selector:
@@ -144,6 +151,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: gateway-service
+  namespace: grocery
 spec:
   type: NodePort
   selector:
