@@ -7,6 +7,7 @@ fi
 if [ "$1" == "customer-signup"]; then
     customer_url=$(minikube service customer-node-service --url -n grocery)
     curl --header "Content-Type: application/json" --request POST --data '{ "email":"test4@test.com",  "password":"12345", "phone":"12345"}' "$customer_url/signup"
+fi
 
 if [ "$1" == "create-product" ]; then
     product_url=$(minikube service product-node-service --url -n grocery)
