@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-node-deployment
+  namespace: grocery
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-node-deployment
+  template:
+    metadata:
+      labels:
+        app: product-node-deployment
+    spec:
+      containers:
+        - name: product
+          image: xdev78/product-node:v1
+          ports:
+            - containerPort: 3500
+          env:
+            - name: MONGODB_URI
+              value: mongodb://mongo:27017/Grocery
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-node-service
+  namespace: grocery
+spec:
+  type: NodePort
+  selector:
+    app: product-node-deployment
+  ports:
+    - port: 3500
+      targetPort: 3500
+      nodePort: 31282
+      protocol: TCP
+
